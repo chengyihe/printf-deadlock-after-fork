@@ -56,8 +56,10 @@ int main()
     pid = fork();
     if (pid == 0) {
         void *ptr;
-        printf("%d:%d, child process after fork\n", getpid(), gettid());
-        printf("%d:%d, is ready to _exit(1)\n", getpid(), gettid());
+        char buf[4096];
+        sprintf(buf, "%d:%d, child process after fork\n", getpid(), gettid());
+        sprintf(buf, "%d:%d, is ready to _exit(1)\n", getpid(), gettid());
+        write(1, buf, strlen(buf));
         _exit(1);
     }
 
